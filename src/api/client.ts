@@ -23,6 +23,9 @@ export class CoursesClient {
     constructor(options: CoursesClientOptions = {}) {
         this.http = axios.create({
             baseURL: options.baseUrl ?? '/api/courses',
+            withCredentials: true,
+            xsrfCookieName: 'XSRF-TOKEN',
+            xsrfHeaderName: 'X-XSRF-TOKEN',
             headers: {
                 Accept: 'application/json',
                 ...(options.bearerToken ? { Authorization: `Bearer ${options.bearerToken}` } : {}),
