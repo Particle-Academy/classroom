@@ -1,4 +1,9 @@
-import { CheckboxGroup, RadioGroup, Text, Textarea } from '@particle-academy/react-fancy';
+import {
+    CheckboxGroup,
+    RadioGroup,
+    Text,
+    Textarea,
+} from '@particle-academy/react-fancy';
 import type { Question } from '../types';
 
 export type AnswerValue =
@@ -14,15 +19,23 @@ export interface QuestionRendererProps {
     disabled?: boolean;
 }
 
-export function QuestionRenderer({ question, value, onChange, disabled }: QuestionRendererProps) {
+export function QuestionRenderer({
+    question,
+    value,
+    onChange,
+    disabled,
+}: QuestionRendererProps) {
     const options = question.options ?? [];
 
     if (question.type === 'multiple_choice' || question.type === 'true_false') {
-        const selected = value?.kind === 'option_id' ? String(value.value) : undefined;
+        const selected =
+            value?.kind === 'option_id' ? String(value.value) : undefined;
 
         return (
-            <div style={{ display: 'grid', gap: '0.5rem' }}>
-                <Text weight="medium">{question.prompt}</Text>
+            <div className="grid gap-3">
+                <Text weight="semibold" className="!text-base !text-secondary-900">
+                    {question.prompt}
+                </Text>
                 <RadioGroup<string>
                     name={`q-${question.id}`}
                     list={options.map((o) => ({ value: String(o.id), label: o.label }))}
@@ -37,12 +50,17 @@ export function QuestionRenderer({ question, value, onChange, disabled }: Questi
     }
 
     if (question.type === 'multiple_select') {
-        const selected = value?.kind === 'option_ids' ? value.value.map(String) : undefined;
+        const selected =
+            value?.kind === 'option_ids' ? value.value.map(String) : undefined;
 
         return (
-            <div style={{ display: 'grid', gap: '0.5rem' }}>
-                <Text weight="medium">{question.prompt}</Text>
-                <Text color="muted" size="sm">Select all that apply</Text>
+            <div className="grid gap-3">
+                <Text weight="semibold" className="!text-base !text-secondary-900">
+                    {question.prompt}
+                </Text>
+                <Text size="sm" color="muted">
+                    Select all that apply.
+                </Text>
                 <CheckboxGroup<string>
                     name={`q-${question.id}`}
                     list={options.map((o) => ({ value: String(o.id), label: o.label }))}
@@ -59,16 +77,21 @@ export function QuestionRenderer({ question, value, onChange, disabled }: Questi
     // short_answer
     const text = value?.kind === 'text' ? value.value : '';
     return (
-        <div style={{ display: 'grid', gap: '0.5rem' }}>
-            <Text weight="medium">{question.prompt}</Text>
+        <div className="grid gap-3">
+            <Text weight="semibold" className="!text-base !text-secondary-900">
+                {question.prompt}
+            </Text>
             <Textarea
                 value={text}
                 onChange={(e) =>
-                    onChange({ kind: 'text', value: (e.target as HTMLTextAreaElement).value })
+                    onChange({
+                        kind: 'text',
+                        value: (e.target as HTMLTextAreaElement).value,
+                    })
                 }
                 disabled={disabled}
                 rows={4}
-                placeholder="Your answer..."
+                placeholder="Type your answer here…"
             />
         </div>
     );

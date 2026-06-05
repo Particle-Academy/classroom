@@ -17,51 +17,86 @@ export function CurriculumOverview({
     const courses = curriculum.courses ?? [];
 
     return (
-        <div className="fc-curriculum-overview" style={{ display: 'grid', gap: '1.25rem' }}>
-            <Card padding="lg">
-                <div style={{ display: 'grid', gap: '0.5rem' }}>
-                    <Heading as="h1" size="2xl">{curriculum.title}</Heading>
-                    {curriculum.description && <Text>{curriculum.description}</Text>}
-                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                        <Badge color={curriculum.is_published ? 'green' : 'zinc'} variant="soft">
+        <div className="grid gap-5">
+            <Card
+                variant="outlined"
+                padding="lg"
+                className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm"
+            >
+                <div className="grid gap-3">
+                    <div className="flex items-center gap-2">
+                        <Badge
+                            color={curriculum.is_published ? 'green' : 'zinc'}
+                            variant="soft"
+                            size="sm"
+                        >
                             {curriculum.is_published ? 'Published' : 'Draft'}
                         </Badge>
-                        <Text color="muted" size="sm">
+                        <Text size="sm" color="muted">
                             {courses.length} course{courses.length === 1 ? '' : 's'}
                         </Text>
                     </div>
+                    <Heading as="h1" size="2xl" weight="bold" className="!text-secondary-900">
+                        {curriculum.title}
+                    </Heading>
+                    {curriculum.description && (
+                        <Text color="muted" className="!text-base">
+                            {curriculum.description}
+                        </Text>
+                    )}
                     {onEnroll && (
-                        <div>
-                            <Action onClick={() => onEnroll(curriculum)}>Enroll in curriculum</Action>
+                        <div className="pt-2">
+                            <Action
+                                onClick={() => onEnroll(curriculum)}
+                                className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
+                            >
+                                Enroll in curriculum
+                            </Action>
                         </div>
                     )}
                 </div>
             </Card>
 
-            <div
-                style={{
-                    display: 'grid',
-                    gap: '0.75rem',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                }}
-            >
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {courses.map((course) => {
                     const percent = courseProgress[course.id] ?? 0;
                     return (
-                        <Card key={course.id} padding="md">
-                            <div style={{ display: 'grid', gap: '0.5rem' }}>
-                                <Heading as="h3" size="lg">{course.title}</Heading>
-                                {course.description && (
-                                    <Text color="muted" size="sm">{course.description}</Text>
-                                )}
-                                <Progress value={percent} max={100} />
-                                <Text size="sm">{percent}% complete</Text>
-                                {onOpenCourse && (
-                                    <Action variant="ghost" onClick={() => onOpenCourse(course)}>
+                        <Card
+                            key={course.id}
+                            variant="outlined"
+                            padding="lg"
+                            className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm hover:!shadow-md transition flex flex-col"
+                        >
+                            <Heading as="h3" size="lg" weight="bold" className="!text-secondary-900">
+                                {course.title}
+                            </Heading>
+                            {course.description && (
+                                <Text color="muted" size="sm" className="!mt-2 line-clamp-2">
+                                    {course.description}
+                                </Text>
+                            )}
+                            <div className="mt-4 grid gap-1.5">
+                                <Progress
+                                    value={percent}
+                                    max={100}
+                                    color="red"
+                                    size="sm"
+                                    className="!bg-secondary-100"
+                                />
+                                <Text size="xs" color="muted">
+                                    {percent}% complete
+                                </Text>
+                            </div>
+                            {onOpenCourse && (
+                                <div className="mt-auto pt-5">
+                                    <Action
+                                        onClick={() => onOpenCourse(course)}
+                                        className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !w-full !justify-center !py-2.5 !rounded-md !shadow-sm"
+                                    >
                                         {percent > 0 ? 'Continue' : 'Start'}
                                     </Action>
-                                )}
-                            </div>
+                                </div>
+                            )}
                         </Card>
                     );
                 })}
