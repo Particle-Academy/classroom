@@ -12,10 +12,17 @@ Built **strictly on Fancy UI primitives** (`@particle-academy/react-fancy`):
 > lifted into its own repo. It will eventually be handed off to the Fancy agent
 > to own and maintain as part of the Fancy UI kit.
 
-## What's inside
+## Install
 
-Source-only package — host apps import from `./src` and bundle it (no build
-step of its own yet).
+```sh
+npm install @particle-academy/classroom
+```
+
+Built with [`tsup`](https://tsup.egoist.dev) to `dist/` (ESM + CJS + type
+declarations). `npm run build` locally; CI type-checks and builds on every push,
+and tagging `v*.*.*` publishes to npm.
+
+## What's inside
 
 | Export | Purpose |
 | --- | --- |
@@ -46,8 +53,9 @@ The host app provides these:
 
 Consumed side-by-side inside the GuardCard.net `.agi` envelope: the host app
 (`repos/gc-website`) resolves the `@classroom` alias to this repo's `./src`, so
-edits here are picked up on the host's next build (`reload`).
+edits here are picked up on the host's next build (`reload`) — no rebuild of this
+package needed during local dev.
 
 ## License
 
-TODO — set to match the rest of the Fancy UI kit before first publish.
+[MIT](./LICENSE) © Particle Academy
