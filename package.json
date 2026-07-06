@@ -1,7 +1,7 @@
 {
     "name": "@particle-academy/classroom",
     "version": "0.0.1",
-    "description": "Classroom UX — course-taking and testing surface for the laravel-courses API. Online courses render here.",
+    "description": "Classroom UX — course-taking and testing surface for the laravel-courses API, built strictly on Fancy UI primitives.",
     "private": true,
     "type": "module",
     "sideEffects": false,
@@ -14,11 +14,23 @@
             "import": "./src/index.ts"
         }
     },
+    "files": [
+        "src",
+        "README.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Particle-Academy/classroom.git"
+    },
+    "homepage": "https://github.com/Particle-Academy/classroom#readme",
+    "bugs": {
+        "url": "https://github.com/Particle-Academy/classroom/issues"
+    },
     "peerDependencies": {
         "@particle-academy/react-fancy": ">=0",
         "axios": ">=1",
         "react": ">=18",
         "react-dom": ">=18"
     },
-    "_notes": "In-tree dev checkout of the future @particle-academy/classroom npm package. Lift the folder into its own repo and `npm publish` to extract."
+    "_notes": "Part of the Fancy UI kit. Source-only package: host apps consume ./src directly (via alias or a sibling checkout) and bundle it. Publish to npm from here when ready."
 }
