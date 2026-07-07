@@ -1,6 +1,6 @@
 {
     "name": "@particle-academy/classroom",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Classroom UX — course-taking and testing surface for the laravel-courses API, built on Fancy UI primitives.",
     "keywords": [
         "courses",
