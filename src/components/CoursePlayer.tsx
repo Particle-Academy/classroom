@@ -4,6 +4,7 @@ import {
     Badge,
     Breadcrumbs,
     Card,
+    cn,
     Heading,
     Progress,
     Sidebar,
@@ -133,11 +134,10 @@ export function CoursePlayer({
                                                 ) : undefined
                                             }
                                             onClick={() => selectLesson(lesson)}
-                                            className={
-                                                active
-                                                    ? '!bg-primary-50 !text-brand !font-semibold'
-                                                    : ''
-                                            }
+                                            className={cn(
+                                                active &&
+                                                    '!bg-primary-50 !text-brand !font-semibold',
+                                            )}
                                         >
                                             <span className="truncate">{lesson.title}</span>
                                         </Sidebar.Item>
@@ -169,11 +169,10 @@ export function CoursePlayer({
                                                 ) : undefined
                                             }
                                             onClick={() => void selectTest(test)}
-                                            className={
-                                                active
-                                                    ? '!bg-primary-50 !text-brand !font-semibold'
-                                                    : ''
-                                            }
+                                            className={cn(
+                                                active &&
+                                                    '!bg-primary-50 !text-brand !font-semibold',
+                                            )}
                                         >
                                             <span className="truncate">{test.title}</span>
                                         </Sidebar.Item>
@@ -302,13 +301,14 @@ function LessonNumber({
 }) {
     return (
         <span
-            className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+            className={cn(
+                'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
                 done
                     ? 'bg-emerald-100 text-emerald-700'
                     : active
                     ? 'bg-brand text-white'
-                    : 'bg-secondary-100 text-secondary-700'
-            }`}
+                    : 'bg-secondary-100 text-secondary-700',
+            )}
         >
             {n}
         </span>

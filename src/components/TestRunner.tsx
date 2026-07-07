@@ -4,6 +4,7 @@ import {
     Badge,
     Callout,
     Card,
+    cn,
     Heading,
     Modal,
     Progress,
@@ -204,23 +205,21 @@ function TestResult({ attempt }: { attempt: TestAttempt }) {
             className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden"
         >
             <div
-                className={`px-6 py-5 ${
-                    pending
-                        ? 'bg-blue-50'
-                        : passed
-                        ? 'bg-emerald-50'
-                        : 'bg-red-50'
-                }`}
+                className={cn(
+                    'px-6 py-5',
+                    pending ? 'bg-blue-50' : passed ? 'bg-emerald-50' : 'bg-red-50',
+                )}
             >
                 <div className="flex items-center gap-3">
                     <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold ${
+                        className={cn(
+                            'flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold',
                             pending
                                 ? 'bg-blue-100 text-blue-700'
                                 : passed
                                 ? 'bg-emerald-100 text-emerald-700'
-                                : 'bg-red-100 text-red-700'
-                        }`}
+                                : 'bg-red-100 text-red-700',
+                        )}
                     >
                         {pending ? '…' : passed ? '✓' : '✕'}
                     </div>
@@ -262,9 +261,10 @@ function Stat({ label, value, highlight }: { label: string; value: string; highl
                 {label}
             </Text>
             <div
-                className={`mt-1 text-2xl font-bold ${
-                    highlight ? 'text-brand' : 'text-secondary-900'
-                }`}
+                className={cn(
+                    'mt-1 text-2xl font-bold',
+                    highlight ? 'text-brand' : 'text-secondary-900',
+                )}
             >
                 {value}
             </div>
