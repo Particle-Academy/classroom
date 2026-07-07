@@ -26,20 +26,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Publish with a fresh npm (11.5.1+ for provenance; the runner ships 10.x).
-      #
-      # Bootstrap (token-first): the first release of this brand-new package
-      # authenticates with the NPM_TOKEN secret below. Add it once with:
-      #   gh secret set NPM_TOKEN --repo Particle-Academy/classroom
-      # (use a granular access token scoped to publish @particle-academy/classroom).
-      #
-      # OIDC upgrade: once a trusted publisher is configured on npmjs for this
-      # package, DELETE the `env:` block below — it then becomes pure Trusted
-      # Publishing (OIDC), matching the other Fancy packages' publish.yml.
-      #
-      # If npm rejects --provenance on the token-based first publish, drop the
-      # `--provenance` flag for that release and re-add it once OIDC is live.
+      # Trusted Publishing (OIDC) — no token. Requires npm 11.5.1+, so fetch a
+      # fresh npm just for publish (the runner's bundled npm is 10.x).
       - name: Publish
         run: npx -y npm@latest publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
