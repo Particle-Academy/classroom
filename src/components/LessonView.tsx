@@ -1,6 +1,6 @@
 import {
     Badge,
-    Action,
+    Button,
     Callout,
     Card,
     ContentRenderer,
@@ -81,14 +81,14 @@ export function LessonView({ lesson, completed, onMarkComplete, onNext: _onNext 
             {!completed && onMarkComplete && (
                 <div className="px-6 py-4 border-t border-secondary-200 bg-secondary-50/50 flex items-center justify-end gap-3">
                     <Tooltip content="Confirms you've finished reading this lesson">
-                        <Action
+                        <Button
                             color="red"
                             icon="check"
                             onClick={() => onMarkComplete(lesson)}
                             className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-5 !py-2.5 !rounded-md !shadow-sm"
                         >
                             Mark complete
-                        </Action>
+                        </Button>
                     </Tooltip>
                 </div>
             )}

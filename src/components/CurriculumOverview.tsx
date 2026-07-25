@@ -1,4 +1,4 @@
-import { Action, Badge, Card, Heading, Progress, Text } from '@particle-academy/react-fancy';
+import { Badge, Button, Card, Heading, Progress, Text } from '@particle-academy/react-fancy';
 import type { Course, Curriculum } from '../types';
 
 export interface CurriculumOverviewProps {
@@ -46,12 +46,12 @@ export function CurriculumOverview({
                     )}
                     {onEnroll && (
                         <div className="pt-2">
-                            <Action
+                            <Button
                                 onClick={() => onEnroll(curriculum)}
                                 className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
                             >
                                 Enroll in curriculum
-                            </Action>
+                            </Button>
                         </div>
                     )}
                 </div>
@@ -89,12 +89,12 @@ export function CurriculumOverview({
                             </div>
                             {onOpenCourse && (
                                 <div className="mt-auto pt-5">
-                                    <Action
+                                    <Button
                                         onClick={() => onOpenCourse(course)}
                                         className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !w-full !justify-center !py-2.5 !rounded-md !shadow-sm"
                                     >
                                         {percent > 0 ? 'Continue' : 'Start'}
-                                    </Action>
+                                    </Button>
                                 </div>
                             )}
                         </Card>

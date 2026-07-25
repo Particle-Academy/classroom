@@ -5,7 +5,7 @@ course-taking and testing surface that renders online courses served by the
 `particle-academy/laravel-courses` API.
 
 Built **strictly on Fancy UI primitives** (`@particle-academy/react-fancy`):
-`Card`, `Action`, `Heading`, `Text`, `Badge`, `Progress`, `Sidebar`,
+`Card`, `Button`, `Heading`, `Text`, `Badge`, `Progress`, `Sidebar`,
 `Breadcrumbs`, and friends. Raw HTML is limited to layout/inline scaffolding.
 
 > **Status.** Bootstrapped from the needs of the GuardCard.net rebuild, then

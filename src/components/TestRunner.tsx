@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import {
-    Action,
     Badge,
+    Button,
     Callout,
     Card,
     cn,
@@ -151,14 +151,14 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                             ? "You've answered every question."
                             : `${questions.length - answeredCount} question${questions.length - answeredCount === 1 ? '' : 's'} remaining`}
                     </Text>
-                    <Action
+                    <Button
                         loading={submitting}
                         disabled={submitting || answeredCount === 0}
                         onClick={() => setConfirmOpen(true)}
                         className="!bg-brand hover:!bg-primary-600 disabled:!bg-secondary-300 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
                     >
                         {submitting ? 'Submitting…' : 'Submit test'}
-                    </Action>
+                    </Button>
                 </div>
             </Card>
 
@@ -173,19 +173,19 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                             : `You have ${questions.length - answeredCount} unanswered question${questions.length - answeredCount === 1 ? '' : 's'}. Unanswered questions count as zero.`}
                     </Text>
                     <div className="mt-6 flex justify-end gap-3">
-                        <Action
+                        <Button
                             variant="ghost"
                             onClick={() => setConfirmOpen(false)}
                             className="!text-secondary-700 hover:!text-brand !px-4 !py-2"
                         >
                             Keep working
-                        </Action>
-                        <Action
+                        </Button>
+                        <Button
                             onClick={handleSubmit}
                             className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-5 !py-2 !rounded-md"
                         >
                             Submit
-                        </Action>
+                        </Button>
                     </div>
                 </Card>
             </Modal>

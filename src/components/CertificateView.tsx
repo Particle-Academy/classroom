@@ -1,4 +1,4 @@
-import { Action, Card, Heading, Text } from '@particle-academy/react-fancy';
+import { Button, Card, Heading, Text } from '@particle-academy/react-fancy';
 import type { Certificate } from '../types';
 
 export interface CertificateViewProps {
@@ -58,12 +58,12 @@ export function CertificateView({
                 </Text>
             </div>
             <div className="px-6 py-4 border-t border-secondary-200 bg-secondary-50/50 flex justify-center gap-3">
-                <Action
+                <Button
                     href={pdfUrl}
                     className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
                 >
                     Download PDF
-                </Action>
+                </Button>
             </div>
         </Card>
     );

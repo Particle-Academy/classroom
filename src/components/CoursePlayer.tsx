@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import {
-    Action,
     Badge,
     Breadcrumbs,
+    Button,
     Card,
     cn,
     Heading,
@@ -275,12 +275,12 @@ export function CoursePlayer({
                                 Once you start, your attempt will be recorded.
                             </Text>
                             <div className="flex justify-center">
-                                <Action
+                                <Button
                                     onClick={() => void selectTest(selection.test)}
                                     className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
                                 >
                                     Start test
-                                </Action>
+                                </Button>
                             </div>
                         </div>
                     </Card>
@@ -347,25 +347,25 @@ function LessonFooter({
     return (
         <div className="flex items-center justify-between gap-3">
             {onPrev ? (
-                <Action
+                <Button
                     variant="ghost"
                     onClick={onPrev}
                     className="!text-secondary-700 hover:!text-brand"
                 >
                     ← <span className="hidden sm:inline ml-1">{prevLabel ?? 'Previous'}</span>
                     <span className="sm:hidden ml-1">Previous</span>
-                </Action>
+                </Button>
             ) : (
                 <span />
             )}
             {onNext && (
-                <Action
+                <Button
                     onClick={onNext}
                     className="!bg-brand hover:!bg-primary-600 !text-white !font-semibold !px-5 !py-2.5 !rounded-md !shadow-sm"
                 >
                     <span className="hidden sm:inline">Next: {nextLabel ?? 'Continue'}</span>
                     <span className="sm:hidden">Next</span> →
-                </Action>
+                </Button>
             )}
         </div>
     );
