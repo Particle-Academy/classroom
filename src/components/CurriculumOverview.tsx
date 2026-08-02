@@ -189,7 +189,11 @@ export function CurriculumOverview({
                             {onOpenCourse && (
                                 <div className={cn('mt-auto pt-5', classNames.cardAction)}>
                                     <Button
-                                        color={percent > 0 ? accent : 'zinc'}
+                                        // Always the accent. A zinc ghost made
+                                        // the primary action on every card read
+                                        // as disabled — an unstarted course is
+                                        // the one thing you most want clicked.
+                                        color={accent}
                                         variant={percent > 0 ? 'default' : 'ghost'}
                                         iconTrailing="chevron-right"
                                         className="w-full justify-center"

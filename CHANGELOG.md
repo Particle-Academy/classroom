@@ -10,6 +10,15 @@ upgrading.
 
 ## [Unreleased]
 
+## 0.4.1 — 2026-08-02
+
+### Fixed
+
+- The per-card action used a zinc ghost until a course was started, which made
+  the primary action on every card read as disabled — an unstarted course is the
+  one thing you most want clicked. It now carries the `accent` in both states,
+  ghost before you start and solid once you have.
+
 ## 0.4.0 — 2026-08-02
 
 ### Fixed
