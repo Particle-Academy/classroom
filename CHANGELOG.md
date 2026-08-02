@@ -10,6 +10,44 @@ upgrading.
 
 ## [Unreleased]
 
+## 0.4.0 — 2026-08-02
+
+### Fixed
+
+- **Buttons rendered as bare grey slabs.** They forced
+  `!bg-brand hover:!bg-primary-600 !text-white` — tokens that, until
+  react-fancy 4.19.0, **nothing defined.** Tailwind generated no such utility,
+  the class resolved to nothing, and every call to action came out unstyled.
+  Colour now comes from react-fancy's *props* (`<Button color>`,
+  `<Badge color>`, `<Progress color>`), which is what they are for.
+
+### Added
+
+- **The components are restylable, three ways.** A library that hardcodes its
+  look is a library you fight:
+  - **`accent`** — any react-fancy `Color`, driving buttons, progress and
+    highlights. Defaults to `violet`.
+  - **`classNames`** — per-slot class overrides (`root`, `hero`, `card`,
+    `cardTitle`, `cardAction`, …), plus `className` on the root.
+  - **`data-classroom-*` attributes** on every slot, so a host can style from
+    its own stylesheet without touching props.
+- `startLabel`, for hosts that do not say "Start".
+
+### Changed
+
+- **No cosmetic `!important` anywhere.** Radius, shadow and spacing are left to
+  react-fancy's defaults or to `classNames`. An `!important` inside a library is
+  a decision taken away from the person consuming it — and the reason the
+  previous version could not be corrected from outside.
+- **A 0%-wide progress bar no longer renders under every card.** It said nothing
+  the "Start" button did not, and made an untouched curriculum look broken.
+  The bar appears once there is progress.
+- Course cards gained a hierarchy: an index, a duration badge, three-line
+  description clamping instead of two, a hover lift, and Continue / Review /
+  Start depending on state.
+- `peerDependencies` on react-fancy bounded to `>=4 <5`. It was `>=4`, with no
+  upper bound at all, which silently accepts a future major that breaks it.
+
 ## 0.3.0 — 2026-08-02
 
 ### Fixed
