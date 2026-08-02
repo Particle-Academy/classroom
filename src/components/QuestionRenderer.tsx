@@ -33,7 +33,7 @@ export function QuestionRenderer({
 
         return (
             <div className="grid gap-3">
-                <Text weight="semibold" className="!text-base !text-secondary-900">
+                <Text weight="semibold" className="!text-base">
                     {question.prompt}
                 </Text>
                 <RadioGroup<string>
@@ -55,7 +55,7 @@ export function QuestionRenderer({
 
         return (
             <div className="grid gap-3">
-                <Text weight="semibold" className="!text-base !text-secondary-900">
+                <Text weight="semibold" className="!text-base">
                     {question.prompt}
                 </Text>
                 <Text size="sm" color="muted">
@@ -78,7 +78,7 @@ export function QuestionRenderer({
     const text = value?.kind === 'text' ? value.value : '';
     return (
         <div className="grid gap-3">
-            <Text weight="semibold" className="!text-base !text-secondary-900">
+            <Text weight="semibold" className="!text-base">
                 {question.prompt}
             </Text>
             <Textarea

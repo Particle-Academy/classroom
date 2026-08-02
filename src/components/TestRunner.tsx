@@ -67,12 +67,12 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
             <Card
                 variant="outlined"
                 padding="none"
-                className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden"
+                className="!rounded-xl !shadow-sm overflow-hidden"
             >
                 <div className="px-6 py-5 border-b border-secondary-200">
                     <div className="flex items-start justify-between gap-4">
                         <div>
-                            <Heading as="h1" size="xl" weight="bold" className="!text-secondary-900">
+                            <Heading as="h1" size="xl" weight="bold">
                                 {test.title}
                             </Heading>
                             {test.description && (
@@ -99,7 +99,6 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                             max={100}
                             color="red"
                             size="sm"
-                            className="!bg-secondary-100"
                         />
                         <div className="flex items-center justify-between">
                             <Text size="xs" color="muted">
@@ -118,7 +117,7 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                             key={q.id}
                             variant="outlined"
                             padding="md"
-                            className="!rounded-lg !border-secondary-200 !bg-secondary-50/50"
+                            className="!rounded-lg"
                         >
                             <div className="flex items-center justify-between mb-3">
                                 <Text size="xs" weight="semibold" className="uppercase tracking-wide" color="muted">
@@ -155,7 +154,7 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                         loading={submitting}
                         disabled={submitting || answeredCount === 0}
                         onClick={() => setConfirmOpen(true)}
-                        className="!bg-brand hover:!bg-primary-600 disabled:!bg-secondary-300 !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
+                        className="!bg-brand hover:!bg-primary-600 disabled: !text-white !font-semibold !px-6 !py-2.5 !rounded-md !shadow-sm"
                     >
                         {submitting ? 'Submitting…' : 'Submit test'}
                     </Button>
@@ -163,8 +162,8 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
             </Card>
 
             <Modal open={confirmOpen} onClose={() => setConfirmOpen(false)} size="sm">
-                <Card variant="flat" padding="lg" className="!bg-white">
-                    <Heading as="h2" size="lg" weight="bold" className="!text-secondary-900">
+                <Card variant="flat" padding="lg">
+                    <Heading as="h2" size="lg" weight="bold">
                         Submit your answers?
                     </Heading>
                     <Text color="muted" className="!mt-2">
@@ -176,7 +175,7 @@ export function TestRunner({ test, onSubmit, onFinished }: TestRunnerProps) {
                         <Button
                             variant="ghost"
                             onClick={() => setConfirmOpen(false)}
-                            className="!text-secondary-700 hover:!text-brand !px-4 !py-2"
+                            className="hover:!text-brand !px-4 !py-2"
                         >
                             Keep working
                         </Button>
@@ -202,7 +201,7 @@ function TestResult({ attempt }: { attempt: TestAttempt }) {
         <Card
             variant="outlined"
             padding="none"
-            className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden"
+            className="!rounded-xl !shadow-sm overflow-hidden"
         >
             <div
                 className={cn(
@@ -224,7 +223,7 @@ function TestResult({ attempt }: { attempt: TestAttempt }) {
                         {pending ? '…' : passed ? '✓' : '✕'}
                     </div>
                     <div>
-                        <Heading as="h2" size="xl" weight="bold" className="!text-secondary-900">
+                        <Heading as="h2" size="xl" weight="bold">
                             {pending ? 'Awaiting grading' : passed ? 'You passed!' : 'Did not pass'}
                         </Heading>
                         <Text className="!mt-0.5" color="muted">

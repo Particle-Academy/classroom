@@ -57,3 +57,30 @@ on `v*.*.*` and needs `permissions: id-token: write`.
 10.x, and `npm@latest` (12.x) broke `--provenance`/sigstore. This package once
 carried `npm@latest` and **could not have published**; a publish workflow only
 runs on a tag, so it stays invisible until a release fails.
+
+## Tailwind v4 consumers — the `@source` line
+
+This package ships **compiled**. Tailwind must scan the installed `dist`, or you
+get correct markup with **none of its classes generated and no error anywhere**:
+
+```css
+@source '../../node_modules/@particle-academy/classroom/dist/**/*.{js,cjs,mjs}';
+```
+
+Reported by the GuardCard agent, who has hit this silent failure three times
+across different Fancy packages. It is the single highest-value line in this
+file for a Tailwind v4 host.
+
+## Colour rules — read before adding a class
+
+**Never force a colour with `!`.** Every card once carried `!bg-white` and every
+heading `!text-secondary-900`. That mixes a **literal** background with a
+**semantic** foreground, so on a dark host the text resolved light and rendered
+white-on-white — invisible, and un-overridable because of the `!`. It survived
+because the only consumer at the time ran a light theme.
+
+- Let react-fancy's `Card` / `Heading` / `Text` supply colour. They already
+  carry `dark:` variants; overriding them is what broke this.
+- If a surface must look the same on every theme — `CertificateView` is paper —
+  use **literal** values for foreground AND background. Never mix one of each.
+- Structural overrides (`!rounded-xl`, `!shadow-sm`, spacing) are fine.

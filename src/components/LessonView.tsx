@@ -24,11 +24,11 @@ export function LessonView({ lesson, completed, onMarkComplete, onNext: _onNext 
         <Card
             variant="outlined"
             padding="none"
-            className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden"
+            className="!rounded-xl !shadow-sm overflow-hidden"
         >
             <div className="px-6 py-5 border-b border-secondary-200 flex items-start justify-between gap-4">
                 <div>
-                    <Heading as="h1" size="xl" weight="bold" className="!text-secondary-900">
+                    <Heading as="h1" size="xl" weight="bold">
                         {lesson.title}
                     </Heading>
                     {lesson.estimated_minutes && (

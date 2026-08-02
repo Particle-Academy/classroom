@@ -18,7 +18,7 @@ export function CertificateView({
         <Card
             variant="outlined"
             padding="none"
-            className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden"
+            className="!rounded-xl !border-zinc-200 !bg-white !shadow-sm overflow-hidden"
         >
             <div
                 className="text-center p-8 sm:p-12 bg-[#fdfaf3] m-3 rounded-lg"
@@ -35,21 +35,21 @@ export function CertificateView({
                     as="h1"
                     size="2xl"
                     weight="bold"
-                    className="mt-4 !text-secondary-900 !text-3xl sm:!text-4xl"
+                    className="mt-4 !text-[#2f2517] !text-3xl sm:!text-4xl"
                 >
                     {programTitle ?? 'Course Completion'}
                 </Heading>
-                <Text className="mt-6 !text-secondary-700">This is to certify that</Text>
+                <Text className="mt-6 !text-[#5b4a33]">This is to certify that</Text>
                 <Heading
                     as="h2"
                     size="xl"
                     weight="bold"
-                    className="!mt-3 !text-secondary-900"
+                    className="!mt-3 !text-[#2f2517]"
                     style={{ fontStyle: 'italic' }}
                 >
                     {recipientName ?? 'Learner'}
                 </Heading>
-                <Text className="mt-3 !text-secondary-700">
+                <Text className="mt-3 !text-[#5b4a33]">
                     has successfully completed the program.
                 </Text>
                 <Text size="sm" color="muted" className="!mt-6">

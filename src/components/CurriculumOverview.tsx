@@ -21,7 +21,7 @@ export function CurriculumOverview({
             <Card
                 variant="outlined"
                 padding="lg"
-                className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm"
+                className="!rounded-xl !shadow-sm"
             >
                 <div className="grid gap-3">
                     <div className="flex items-center gap-2">
@@ -36,7 +36,7 @@ export function CurriculumOverview({
                             {courses.length} course{courses.length === 1 ? '' : 's'}
                         </Text>
                     </div>
-                    <Heading as="h1" size="2xl" weight="bold" className="!text-secondary-900">
+                    <Heading as="h1" size="2xl" weight="bold">
                         {curriculum.title}
                     </Heading>
                     {curriculum.description && (
@@ -65,9 +65,9 @@ export function CurriculumOverview({
                             key={course.id}
                             variant="outlined"
                             padding="lg"
-                            className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm hover:!shadow-md transition flex flex-col"
+                            className="!rounded-xl !shadow-sm hover:!shadow-md transition flex flex-col"
                         >
-                            <Heading as="h3" size="lg" weight="bold" className="!text-secondary-900">
+                            <Heading as="h3" size="lg" weight="bold">
                                 {course.title}
                             </Heading>
                             {course.description && (
@@ -81,7 +81,6 @@ export function CurriculumOverview({
                                     max={100}
                                     color="red"
                                     size="sm"
-                                    className="!bg-secondary-100"
                                 />
                                 <Text size="xs" color="muted">
                                     {percent}% complete

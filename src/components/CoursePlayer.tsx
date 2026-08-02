@@ -72,10 +72,10 @@ export function CoursePlayer({
             <Card
                 variant="outlined"
                 padding="none"
-                className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm overflow-hidden md:sticky md:top-4"
+                className="!rounded-xl !shadow-sm overflow-hidden md:sticky md:top-4"
             >
                 <div className="px-5 py-4 border-b border-secondary-200">
-                    <Heading as="h2" size="md" weight="bold" className="!text-secondary-900">
+                    <Heading as="h2" size="md" weight="bold">
                         {course.title}
                     </Heading>
                     {course.description && (
@@ -89,7 +89,6 @@ export function CoursePlayer({
                             max={100}
                             color="red"
                             size="sm"
-                            className="!bg-secondary-100"
                         />
                         <div className="flex items-center justify-between">
                             <Text size="xs" color="muted">
@@ -214,7 +213,7 @@ export function CoursePlayer({
                     <Card
                         variant="outlined"
                         padding="lg"
-                        className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm text-center"
+                        className="!rounded-xl !shadow-sm text-center"
                     >
                         <Text>This course has no content yet.</Text>
                     </Card>
@@ -265,7 +264,7 @@ export function CoursePlayer({
                     <Card
                         variant="outlined"
                         padding="lg"
-                        className="!rounded-xl !border-secondary-200 !bg-white !shadow-sm"
+                        className="!rounded-xl !shadow-sm"
                     >
                         <div className="grid gap-3 text-center">
                             <Heading as="h3" size="lg" weight="bold">
@@ -350,7 +349,7 @@ function LessonFooter({
                 <Button
                     variant="ghost"
                     onClick={onPrev}
-                    className="!text-secondary-700 hover:!text-brand"
+                    className="hover:!text-brand"
                 >
                     ← <span className="hidden sm:inline ml-1">{prevLabel ?? 'Previous'}</span>
                     <span className="sm:hidden ml-1">Previous</span>
