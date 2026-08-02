@@ -10,6 +10,19 @@ upgrading.
 
 ## [Unreleased]
 
+## 0.4.2 — 2026-08-02
+
+### Fixed
+
+- **The test result banner was unreadable on a dark host.** `TestResult` drew
+  its pass/fail/pending tint with literal light values (`bg-red-50`,
+  `bg-emerald-50`, `bg-blue-50`) and put a theme-aware heading on top, so on a
+  dark theme the text went light and vanished into the pale background — a
+  learner saw an icon and a subtitle where the verdict should be. The same
+  literal-background-plus-semantic-foreground collision as 0.3.0, in a spot with
+  no `!` to grep for; found by actually sitting a test in a browser. All three
+  tints and their icon chips now carry dark variants.
+
 ## 0.4.1 — 2026-08-02
 
 ### Fixed

@@ -206,7 +206,11 @@ function TestResult({ attempt }: { attempt: TestAttempt }) {
             <div
                 className={cn(
                     'px-6 py-5',
-                    pending ? 'bg-blue-50' : passed ? 'bg-emerald-50' : 'bg-red-50',
+                    pending
+                            ? 'bg-blue-50 dark:bg-blue-950/40'
+                            : passed
+                              ? 'bg-emerald-50 dark:bg-emerald-950/40'
+                              : 'bg-red-50 dark:bg-red-950/40',
                 )}
             >
                 <div className="flex items-center gap-3">
@@ -214,10 +218,10 @@ function TestResult({ attempt }: { attempt: TestAttempt }) {
                         className={cn(
                             'flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold',
                             pending
-                                ? 'bg-blue-100 text-blue-700'
+                                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
                                 : passed
-                                ? 'bg-emerald-100 text-emerald-700'
-                                : 'bg-red-100 text-red-700',
+                                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-200'
+                                : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200',
                         )}
                     >
                         {pending ? '…' : passed ? '✓' : '✕'}
