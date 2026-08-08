@@ -10,6 +10,43 @@ upgrading.
 
 ## [Unreleased]
 
+## 0.6.0 — 2026-08-07
+
+### Security
+
+- **A lesson video was framed from any URL an admin typed, unsandboxed.**
+  `LessonView` rendered `<iframe src={lesson.video_url}>` directly. The server
+  validates that column as nothing more than `nullable|url|max:2048`, so the
+  component would frame whatever was in it — running a third party's code in the
+  learner's browser inside your page, with no restrictions and no allowlist.
+
+  Now: the URL must be **https** and its host must be on an allowlist, the frame
+  carries a `sandbox` attribute, and `referrerPolicy` is
+  `strict-origin-when-cross-origin`.
+
+  **What you must do:** if your videos come from YouTube, Vimeo, Wistia, Bunny
+  or Cloudinary, nothing — those are the defaults. If you self-host or use
+  another provider, pass its host:
+
+  ```tsx
+  <LessonView lesson={lesson} allowedVideoHosts={['video.example.com']} />
+  ```
+
+  A URL that is not allowed renders a visible notice with a plain link out,
+  rather than an empty space — a silently blocked embed looks like a lesson with
+  no video, and nobody would know to fix it.
+
+  Host matching is exact or on a dot boundary, never `endsWith` on the bare
+  name: `evil-youtube.com` ends with `youtube.com`, and that is the usual way an
+  allowlist turns out not to be one.
+
+### Added
+
+- `isEmbeddableVideo(url, allowedHosts)` is exported, so a host can apply the
+  same check to its own admin form and reject a bad URL at entry rather than at
+  render.
+
+
 ## 0.5.0 — 2026-08-07
 
 ### Changed

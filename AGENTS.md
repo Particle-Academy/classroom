@@ -37,16 +37,23 @@ here.
   `short_answer` returns `passed: null` until a human grades it — *not* `false`.
   Rendering null as a failure tells a learner they failed a test they may well
   have passed. Show "awaiting grading".
-- **Peer, not dependency, on `react-fancy`** (`>=4 <5` — bounded; an unbounded
-  peer silently accepts a future major that breaks you). `axios` is likewise a
-  peer, so the host owns interceptors and auth headers.
+- **Peer, not dependency, on `react-fancy`** (`>=4`). It was `>=4 <5`, and that
+  cap is what stopped this package co-installing with react-fancy 5 when the kit
+  0.5 floors shipped it — a resolver reading the new major as a conflict rather
+  than an upgrade, reporting nothing. Sibling ranges do not cap the major here.
+  `axios` is likewise a peer, so the host owns interceptors and auth headers.
 
 ## Testing
 
-No suite yet — this package predates its own tests. The behaviour worth covering
-first is `answerValueToPayload` across all four question types and the
-`passed: null` rendering path, because both fail in ways that look like a
-learner's fault rather than a bug.
+`npm test` (vitest + jsdom). 25 tests covering `answerValueToPayload` across all
+four question types — it is the wire format a graded answer is submitted in, and
+getting a shape wrong there marks a learner's correct answer wrong rather than
+throwing — plus the video-embed allowlist.
+
+Still uncovered and worth doing next: the **`passed: null`** rendering path. An
+attempt containing a `short_answer` returns null until a human grades it, and
+rendering null as a failure tells a learner they failed a test they may have
+passed.
 
 ## Publishing
 

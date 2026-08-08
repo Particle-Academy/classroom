@@ -15,10 +15,75 @@ export interface LessonViewProps {
     completed?: boolean;
     onMarkComplete?: (lesson: Lesson) => void | Promise<void>;
     onNext?: (lesson: Lesson) => void;
+    /**
+     * Hosts a lesson video may be embedded from. Defaults to the common
+     * providers below; pass your own to allow a self-hosted player.
+     *
+     * `lesson.video_url` is admin-supplied and validated on the server as
+     * nothing more than a URL, so without this the component would frame
+     * whatever a compromised or careless admin put in that column.
+     */
+    allowedVideoHosts?: string[];
 }
 
-export function LessonView({ lesson, completed, onMarkComplete, onNext: _onNext }: LessonViewProps) {
+/**
+ * The default embed allowlist — the hosts a course video actually comes from.
+ *
+ * Deliberately not "anything https". An `<iframe>` runs a third party's code in
+ * the learner's browser inside your page, so the set of origins allowed to do
+ * that should be a decision someone made, not a side effect of what an admin
+ * typed into a text field.
+ */
+const DEFAULT_VIDEO_HOSTS = [
+    'youtube.com',
+    'www.youtube.com',
+    'youtube-nocookie.com',
+    'www.youtube-nocookie.com',
+    'youtu.be',
+    'player.vimeo.com',
+    'vimeo.com',
+    'fast.wistia.net',
+    'iframe.mediadelivery.net',
+    'player.cloudinary.com',
+];
+
+/**
+ * Whether a URL is safe to frame: https, and a host on the allowlist.
+ *
+ * Subdomain matching is exact or a dotted suffix, never `endsWith` on the bare
+ * name — `evil-youtube.com`.endsWith(`youtube.com`) is true, and that is the
+ * usual way an allowlist turns out not to be one.
+ */
+export function isEmbeddableVideo(url: string | null | undefined, allowed: string[]): boolean {
+    if (!url) return false;
+
+    let parsed: URL;
+    try {
+        parsed = new URL(url);
+    } catch {
+        return false;
+    }
+
+    if (parsed.protocol !== 'https:') return false;
+
+    const host = parsed.hostname.toLowerCase();
+
+    return allowed.some((entry) => {
+        const allowedHost = entry.toLowerCase();
+
+        return host === allowedHost || host.endsWith(`.${allowedHost}`);
+    });
+}
+
+export function LessonView({
+    lesson,
+    completed,
+    onMarkComplete,
+    onNext: _onNext,
+    allowedVideoHosts = DEFAULT_VIDEO_HOSTS,
+}: LessonViewProps) {
     const contentType = lesson.content_type ?? 'text';
+    const embeddable = isEmbeddableVideo(lesson.video_url, allowedVideoHosts);
 
     return (
         <Card
@@ -51,15 +116,44 @@ export function LessonView({ lesson, completed, onMarkComplete, onNext: _onNext 
 
             <div className="px-6 py-6 grid gap-5">
                 {(contentType === 'video' || contentType === 'mixed') && lesson.video_url && (
-                    <div className="relative pt-[56.25%] rounded-xl overflow-hidden bg-secondary-900 shadow-sm">
-                        <iframe
-                            src={lesson.video_url}
-                            title={lesson.title}
-                            allow="autoplay; encrypted-media; picture-in-picture"
-                            allowFullScreen
-                            className="absolute inset-0 w-full h-full border-0"
-                        />
-                    </div>
+                    embeddable ? (
+                        <div className="relative pt-[56.25%] rounded-xl overflow-hidden bg-secondary-900 shadow-sm">
+                            <iframe
+                                src={lesson.video_url}
+                                title={lesson.title}
+                                // allow-same-origin refers to the FRAME's own origin, not
+                                // this page's, so a cross-origin player still cannot reach
+                                // into the host document. Both it and allow-scripts are
+                                // required for any real video player to run.
+                                sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox"
+                                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                loading="lazy"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full border-0"
+                            />
+                        </div>
+                    ) : (
+                        // Loud, not silent. A blocked embed that rendered nothing would
+                        // look like a lesson with no video, and nobody would know to fix
+                        // the URL.
+                        <Callout color="amber" data-lesson-video-blocked>
+                            <p className="font-medium">This lesson&apos;s video cannot be shown here.</p>
+                            <p className="text-sm">
+                                It is hosted somewhere this course is not configured to embed from. Ask an
+                                administrator to use an approved video host, or open it directly:{' '}
+                                <a
+                                    href={lesson.video_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer nofollow"
+                                    className="underline"
+                                >
+                                    open the video
+                                </a>
+                                .
+                            </p>
+                        </Callout>
+                    )
                 )}
 
                 {(contentType === 'text' || contentType === 'mixed') && lesson.content && (
