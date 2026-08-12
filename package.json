@@ -1,7 +1,7 @@
 {
     "name": "@particle-academy/classroom",
-    "version": "0.6.0",
-    "description": "Classroom UX — course-taking and testing surface for the laravel-courses API, built on Fancy UI primitives.",
+    "version": "0.7.0",
+    "description": "Classroom UX \u2014 course-taking and testing surface for the laravel-courses API, built on Fancy UI primitives.",
     "keywords": [
         "courses",
         "classroom",
@@ -48,13 +48,13 @@
         "test:watch": "vitest"
     },
     "peerDependencies": {
-        "@particle-academy/react-fancy": ">=4",
+        "@particle-academy/react-fancy": ">=5.19",
         "axios": ">=1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
     "devDependencies": {
-        "@particle-academy/react-fancy": "^4.19.0",
+        "@particle-academy/react-fancy": "^5.19.0",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
         "axios": "^1.11.0",

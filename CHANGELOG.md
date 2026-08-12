@@ -10,6 +10,31 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-08-11
+
+### Fixed
+
+- **The lesson sidebar was sliced by a stray vertical line.** `Sidebar` is an
+  app-shell rail: it hardcodes a right border and a fixed `w-60`. Inside the
+  player's 300px card that put the border 240px in — mid-panel, reading as a
+  line cutting the card rather than an edge — with its opaque background sitting
+  over the card's own surface. It now renders with react-fancy's `embedded`.
+
+- **The two panels started at different heights.** The breadcrumb was the right
+  column's first child, so that column's card began one breadcrumb-row below the
+  sidebar's. It is hoisted above the grid, where it spans both columns and the
+  cards align.
+
+### Changed
+
+- **BREAKING: `@particle-academy/react-fancy` peer floor is now `>=5.19`**
+  (was `>=4`), because `embedded` landed in 5.19.0.
+
+  **What to do:** upgrade react-fancy to 5.19 or later. If you are on react-fancy
+  4, stay on classroom 0.6 — nothing else in this release needs the newer
+  version. There is no API change on this package's own surface.
+
+
 ## 0.6.0 — 2026-08-07
 
 ### Security
