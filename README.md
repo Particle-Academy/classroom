@@ -1,5 +1,7 @@
 # @particle-academy/classroom
 
+[![Fancified](art/fancified.svg)](https://particle.academy)
+
 Classroom UX for the [Fancy UI](https://github.com/Particle-Academy) kit — the
 course-taking and testing surface that renders online courses served by the
 `particle-academy/laravel-courses` API.
@@ -9,8 +11,7 @@ Built **strictly on Fancy UI primitives** (`@particle-academy/react-fancy`):
 `Breadcrumbs`, and friends. Raw HTML is limited to layout/inline scaffolding.
 
 > **Status.** Bootstrapped from the needs of the GuardCard.net rebuild, then
-> lifted into its own repo. It will eventually be handed off to the Fancy agent
-> to own and maintain as part of the Fancy UI kit.
+> lifted into its own repo. It is now maintained as part of the Fancy UI kit.
 
 ## Install
 
