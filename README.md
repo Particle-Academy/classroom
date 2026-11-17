@@ -13,15 +13,20 @@ Built **strictly on Fancy Dev Kit primitives** (`@particle-academy/react-fancy`)
 > **Status.** Bootstrapped from the needs of the GuardCard.net rebuild, then
 > lifted into its own repo. It is now maintained as part of the Fancy Dev Kit.
 
+<!-- fancy-agents-note:start -->
+> **For agents.** Every Fancy package, this one included, is listed on the
+> Fancy MCP catalog server at `https://ui.particle.academy/mcp` (streamable HTTP, no API key;
+> MCP id `fancy-ui`), with install commands and docs. How an agent installs
+> and uses this package is in [AGENTS.md](https://github.com/Particle-Academy/classroom/blob/main/AGENTS.md).
+<!-- fancy-agents-note:end -->
+
 ## Install
 
 ```sh
 npm install @particle-academy/classroom
 ```
 
-Built with [`tsup`](https://tsup.egoist.dev) to `dist/` (ESM + CJS + type
-declarations). `npm run build` locally; CI type-checks and builds on every push,
-and tagging `v*.*.*` publishes to npm.
+Ships compiled to `dist/` (ESM + CJS + type declarations).
 
 ## What's inside
 
@@ -47,15 +52,10 @@ import { CoursePlayer, CoursesClient } from '@particle-academy/classroom';
 The host app provides these:
 
 - `@particle-academy/react-fancy`
-- `react` / `react-dom` (>= 18)
+- `react` / `react-dom` (^19)
 - `axios` (>= 1)
 
-## Local development
-
-Consumed side-by-side inside the GuardCard.net `.agi` envelope: the host app
-(`repos/gc-website`) resolves the `@classroom` alias to this repo's `./src`, so
-edits here are picked up on the host's next build (`reload`) — no rebuild of this
-package needed during local dev.
+Working on this package's code? See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
